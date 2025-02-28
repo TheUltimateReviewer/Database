@@ -27,7 +27,9 @@ CREATE TABLE app_user (
     is_enabled BOOLEAN NOT NULL,
     account_non_expired BOOLEAN NOT NULL,
     account_non_locked BOOLEAN NOT NULL,
-    credentials_non_expired BOOLEAN NOT NULL
+    credentials_non_expired BOOLEAN NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20)
 );
 
 -- Crear la tabla de relación entre usuarios y roles
@@ -69,3 +71,17 @@ INSERT INTO role_permission (role_ide, premission_id) VALUES (4, 4);
 INSERT INTO role_permission (role_ide, premission_id) VALUES (4, 5);
 
 INSERT INTO role_permission (role_ide, premission_id) VALUES (3, 1);
+
+
+-- vista para obtener los permisos segun el rol
+
+CREATE VIEW role_permissions_view AS
+SELECT 
+    r.role AS role_name,  
+    p.permission AS permission_name
+FROM 
+    role r
+JOIN 
+    role_permission rp ON r.id = rp.role_ide
+JOIN 
+    permission p ON rp.premission_id = p.id;
