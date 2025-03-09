@@ -23,6 +23,7 @@ CREATE TABLE role_permission (
 CREATE TABLE app_user (
     id BIGSERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
+    profile_id BIGINT,
     password VARCHAR(255) NOT NULL,
     is_enabled BOOLEAN NOT NULL,
     account_non_expired BOOLEAN NOT NULL,
